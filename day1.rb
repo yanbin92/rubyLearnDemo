@@ -154,18 +154,20 @@ end
 def search_info2(book,name)
 	for i in book.data	
 		if (i.firstname+i.secondname)
+			return i
+		end
 	end
 end
 
 class AddressBook
 	attr_accessor :name
 	attr_accessor :data
-	...
+	#... other thing
 end
 class PersonalInfo
 	attr_accessor :firstname
 	attr_accessor :secondname
-	....
+	#....
 end
 
 #这样当数据结构改变需要加上新的处理程序
@@ -178,7 +180,7 @@ end
 class PersonalInfo2
 	attr_accessor :firstname
 	attr_accessor :secondname
-	........
+	#........
 	#行为
 	def name
 		return @firstname+@secondname
@@ -205,9 +207,36 @@ end
 =end
 
 #面向对象的特征
-封装
+#封装  隐藏内部数据处理
+#多态  polymorphism  对象对于消息都有其独有的解释方式
+require 'io/console'
+
+str="" 
+io=$stdout #io对象
+str << "ruby"
+io << "ruby"
+#一样时<< 这个方法 str 与io 对象的处理方式不同
+#两者都是用来新增字符串的接口 使用者不需要知道实际的数据结构与处理细节 以对象为中心的的思维 让我们将接口(送什么消息会有什么反应)与实现()分开思考的机会
+#另外实际的处理由每个对象各自负责 发生什么问题的时候 也比较容易需要加以修正或修改
 
 
+# duck typing 
+def fetch_and_downcase(ary,index)
+	if str=ary[index] #任何不是false or nil 都为true
+		return str.downcase
+	end
+end
+ary=["adele","ailen"]
+puts fetch_and_downcase(ary,1)
+
+hash={1=>"adele",2=>"ailen",3=>"bitch"}
+puts fetch_and_downcase(hash,1)
+#对象的特征并不是依赖其实际的种类(class),而是依据对象具有哪些行为(function)来决定的
+#使用fetch_and_downcase function只要满足
+#1可以使用ary[index]的方式取出元素
+#2取出的元素具有downcase function
+
+#Ruby的变量没有类型 所以程序要在执行阶段才能判断变量所指向的对象是否有方法可以调用 从某些方面来说这可能时个缺点 
 
 
 
