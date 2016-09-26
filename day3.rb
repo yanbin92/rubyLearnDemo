@@ -384,15 +384,21 @@ p sum_array([1,2,3],[4,6,8])
 #练习9  检查数组中括号是否对称
 def balanced?(arr)
 	new_ary=[]	#栈
-	item_first=arr.shift
 	while(arr.length>0)
-		if(item_first=="("|item_first=="{")
+		item_first=arr.shift
+		#p item_first
+		if((item_first == "(") |
+		(item_first == "{")
+		)
 			new_ary.push(item_first)
-		elsif(item_first==")"&&new_ary.last=="(")#匹配
+		elsif(item_first==")" &&
+		(new_ary.last=="("))#匹配
 			new_ary.pop
-		elsif(item_first=="}"&&new_ary.last=="}")
+		elsif(item_first=="}"&&
+		(new_ary.last=="{"))
 			new_ary.pop
 		else
+			#p new_ary
 			return false
 		end
 	end
